@@ -8,6 +8,15 @@ A **Package Diagram** is a UML diagram that shows:
 
 > 👉 Focus: **How your codebase is structured**
 
+A **Package Diagram** organizes system elements into **logical groups** and defines:
+
+* Dependencies
+* Access rules
+* Visibility
+* Architecture layers
+
+> 👉 Focus: **Modularity + Dependency Control**
+
 ---
 
 # 🎯 Purpose
@@ -35,6 +44,10 @@ A **Package Diagram** is a UML diagram that shows:
 ![](https://res.cloudinary.com/dnazyivn1/image/upload/v1771596303/Screenshot_2026-02-20_at_7.34.21_PM_sz2r8o.png)
 
 ![](https://res.cloudinary.com/dnazyivn1/image/upload/v1771596393/Screenshot_2026-02-20_at_7.35.52_PM_kpj0z0.png)
+
+![](https://res.cloudinary.com/dnazyivn1/image/upload/v1771784953/Screenshot_2026-02-22_at_11.58.32_PM_ppom0t.png)
+
+![](https://res.cloudinary.com/dnazyivn1/image/upload/v1771785311/Screenshot_2026-02-23_at_12.04.40_AM_ygpfgn.png)
 
 ---
 
@@ -315,5 +328,322 @@ Include:
 * Order
 * Payment
 * Delivery
+
+---
+
+# 🎯 Why Advanced Concepts Matter
+
+* Prevent tight coupling
+* Enforce clean architecture
+* Control access between modules
+* Improve scalability
+
+---
+
+# 🧩 1️⃣ Package Stereotypes
+
+![Image](https://i.sstatic.net/vwFak.gif)
+
+![Image](https://www.uml-diagrams.org/examples/package-diagrams-example-layers.png)
+
+![Image](https://cdn-images.visual-paradigm.com/tutorials/howtocreatestereotypedmodelelement_screenshots/00-stereotyped-shapes.png)
+
+![Image](https://www.visual-paradigm.com/servlet/editor-content/guide/uml-unified-modeling-language/modeling-software-architecture-with-package/sites/7/2019/12/package-diagram-explained.png)
+
+---
+
+## 🧠 What is a Stereotype?
+
+> Adds **semantic meaning** to a package
+
+---
+
+## ✅ Common Stereotypes
+
+| Stereotype       | Meaning          |
+| ---------------- | ---------------- |
+| `<<controller>>` | Handles requests |
+| `<<service>>`    | Business logic   |
+| `<<repository>>` | Data access      |
+| `<<entity>>`     | Domain model     |
+| `<<utility>>`    | Shared helpers   |
+
+---
+
+## 💻 Code Mapping (NestJS)
+
+```ts
+// <<controller>>
+@Controller('orders')
+export class OrderController {}
+```
+
+```ts
+// <<service>>
+@Injectable()
+export class OrderService {}
+```
+
+```ts
+// <<repository>>
+@Injectable()
+export class OrderRepository {}
+```
+
+---
+
+# 🧩 2️⃣ Package Import vs Access
+
+---
+
+## 🧠 Import (<<import>>)
+
+![Image](https://www.softwareideas.net/i/DirectImage/365/uml-package-diagram)
+
+![Image](https://www.uml-diagrams.org/package-diagrams/package-diagram-elements.png)
+
+---
+
+### ✅ Meaning:
+
+* Import all public elements
+* Full visibility
+
+---
+
+### 💻 Code Mapping
+
+```ts
+import { OrderService } from '../order/order.service';
+```
+
+✔ Full access
+
+---
+
+---
+
+## 🧠 Access (<<access>>)
+
+![Image](https://www.softwareideas.net/i/DirectImage/365/uml-package-diagram)
+
+![Image](https://www.visual-paradigm.com/servlet/editor-content/guide/uml-unified-modeling-language/modeling-software-architecture-with-package/sites/7/2019/12/package-diagram-explained.png)
+
+![Image](https://www.uml-diagrams.org/package-diagrams/model-diagram-elements.png)
+
+![Image](https://cdn-images.visual-paradigm.com/guide/uml/what-is-package-diagram/02-simple-package-diagram-example.png)
+
+---
+
+### ✅ Meaning:
+
+* Limited / controlled access
+* Only specific elements
+
+---
+
+### 💻 Code Mapping
+
+```ts
+// Access only via interface
+import { IOrderService } from '../order/interfaces';
+```
+
+✔ Restricted access
+
+---
+
+# ⚔️ Import vs Access
+
+| Feature    | Import       | Access           |
+| ---------- | ------------ | ---------------- |
+| Visibility | Full         | Limited          |
+| Usage      | Direct usage | Controlled usage |
+| Coupling   | Higher       | Lower            |
+
+---
+
+# 🧩 3️⃣ Access Modifiers (Visibility)
+
+---
+
+## 🧠 UML Symbols
+
+| Symbol | Meaning   |
+| ------ | --------- |
+| `+`    | Public    |
+| `-`    | Private   |
+| `#`    | Protected |
+| `~`    | Package   |
+
+---
+
+## 💻 TypeScript Mapping
+
+```ts
+class User {
+  public name: string;     // +
+  private password: string; // -
+  protected role: string;  // #
+}
+```
+
+---
+
+## 🧠 Package-Level Visibility
+
+```ts
+// Not exported → package-private
+class InternalService {}
+```
+
+```ts
+// Exported → public
+export class PublicService {}
+```
+
+---
+
+# 🧩 4️⃣ Dependency Direction (VERY IMPORTANT)
+
+![Image](https://i.sstatic.net/32gQH.jpg)
+
+![Image](https://www.uml-diagrams.org/examples/package-diagrams-example-layers.png)
+
+![Image](https://i.sstatic.net/3WOuu.jpg)
+
+![Image](https://www.visual-paradigm.com/servlet/editor-content/guide/uml-unified-modeling-language/modeling-software-architecture-with-package/sites/7/2019/12/package-diagram-explained.png)
+
+---
+
+## 🧠 Rule:
+
+```
+Outer → Inner only
+```
+
+---
+
+## Example:
+
+```
+Controller → Service → Repository → Entity
+```
+
+✔ Allowed
+❌ Reverse dependency
+
+---
+
+# 🧩 5️⃣ Layered Package Architecture
+
+---
+
+## 🧠 Clean Architecture
+
+```
+📁 presentation <<controller>>
+📁 application <<service>>
+📁 domain <<entity>>
+📁 infrastructure <<repository>>
+```
+
+---
+
+## 💻 Example Structure
+
+```id="pkg1"
+src/
+ ├── presentation/
+ ├── application/
+ ├── domain/
+ ├── infrastructure/
+```
+
+---
+
+# 🧩 6️⃣ Real Example (Your Stack 🔥)
+
+---
+
+## 🧠 Package Diagram (Logical)
+
+```
+📁 order <<module>>
+   ├── <<controller>>
+   ├── <<service>>
+   ├── <<repository>>
+   ├── <<entity>>
+```
+
+---
+
+## 💻 Code
+
+```ts
+// controller → service
+constructor(private orderService: OrderService) {}
+```
+
+```ts
+// service → repository
+constructor(private repo: OrderRepository) {}
+```
+
+---
+
+# ⚠️ Common Mistakes
+
+❌ Circular dependencies
+
+❌ Exposing everything (no encapsulation)
+
+❌ Ignoring access modifiers
+
+❌ Mixing layers
+
+---
+
+# 🔥 Best Practices
+
+* Use **interfaces for access control**
+* Keep packages **independent**
+* Follow **dependency direction rule**
+* Apply **stereotypes clearly**
+
+---
+
+# 🧠 Senior-Level Insight
+
+> Advanced package diagrams enforce architectural boundaries by controlling visibility, dependencies, and access, ensuring scalable and maintainable systems.
+
+---
+
+# 🎯 Simple Memory Trick
+
+👉
+
+* `<< >>` = meaning
+* import = full access
+* access = limited
+* arrows = dependency
+
+---
+
+# 🧪 Practice (VERY IMPORTANT)
+
+Design:
+
+👉 E-commerce package diagram with:
+
+* User
+* Order
+* Payment
+
+Include:
+
+* stereotypes
+* import/access
+* access modifiers
 
 ---
