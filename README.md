@@ -137,26 +137,31 @@ Here’s an example for **Week 1**:
 
 
 ### Creational Design Patterns (Object Creation): 
-* These patterns deal with object creation mechanisms, increasing flexibility and reuse. 
+ These patterns deal with object creation mechanisms, increasing flexibility and reuse. 
+ 
 * Abstract Factory: Creates families of related objects.
 *  Builder: Constructs complex objects step-by-step.
 * Factory Method: Creates objects without specifying the exact class.
 * Prototype: Creates new objects by cloning an existing one.
 * Singleton: Ensures a class has only one instance.
-* Object Pool: Reuses objects to avoid expensive creation. 
-* Structural Design Patterns (Object Composition)
+* Object Pool: Reuses objects to avoid expensive creation.
 
-### These patterns explain how to assemble objects and classes into larger structures. 
+  
+### Structural Design Patterns (Object Composition)
+ These patterns explain how to assemble objects and classes into larger structures. 
+ 
 * Adapter: Allows incompatible interfaces to work together.
 * Bridge: Decouples abstraction from implementation.
 * Composite: Composes objects into tree structures.
 * Decorator: Dynamically adds responsibilities to objects.
 * Facade: Provides a simplified interface to a complex system.
 * Flyweight: Minimizes memory usage by sharing data.
-* Proxy: Provides a placeholder to control access to an object. 
-* Behavioral Design Patterns (Object Communication) 
+* Proxy: Provides a placeholder to control access to an object.
 
-### These patterns manage algorithms, relationships, and responsibilities between objects. 
+### Behavioral Design Patterns (Object Communication) 
+
+ These patterns manage algorithms, relationships, and responsibilities between objects. 
+ 
 * Chain of Responsibility: Passes requests along a chain of handlers.
 * Command: Turns a request into a stand-alone object.
 * Interpreter: Implements a specialized language.
