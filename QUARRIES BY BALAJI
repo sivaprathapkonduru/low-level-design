@@ -1,6 +1,28 @@
-HOW TO CREATRE NEW REPOSITORY?? 
-HOW DOES THEY WORK??
-WHERE TO PUSH THEM??
+HOW TO CREATE A NEW REPOSITORY?? 
+Use any version control provider like GitHub, GitLab, Bitbucket, etc. 
+Create an account and create a repo based on the requirement. If it is for collaboration and an internal project you don't wanna reveal,
+then go ahead with private mode. Otherwise, like if you wanna display your work better, go with creating public mode.
+
+
+HOW DO THEY WORK?? 
+It is used for collaboration, code maintenance, and virtual code storage - write code, 
+download wherever you want for deploying, developing, etc.
+
+WHERE TO PUSH THEM?? 
+From your physical system repo to a remote repo. You should have the Git Bash tool to commit the latest code, 
+which is an open-source tool and supports all OS's like Windows, Ubuntu, Linux, Mac. Steps to update your code to the repo.
+1. git add -A or -a or . 
+    else specific folder or file path
+2. git commit -m 'here you provide message. which should describe your work update/ changes you have made with short description with ticket number'
+3. git push (or) git push origin <branch name>
+
 HOW TO EDIT THEM??
-WHAT IS GIT BASH??
+You mean code. To edit code, you can do the same process. But before editing, you should 'git pull origin <branch name> to get updated code
+Before you start the task, do git pull origin < branch name> to avoid merge conflicts.
+
+WHAT IS GIT BASH?? 
+It is used to run Git and Unix-like commands. Like clone, push, pull, and resolve merge conflicts, maintain branches, 
+cherry-picking, etc in your local system repo.
+
 HOW TO WORK WITH COMMAND PROMPTS CMD'S??
+For real-time, it is better to use GitBash for color lints. Try to avoid PowerShell or cmd
